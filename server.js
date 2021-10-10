@@ -3,10 +3,10 @@ const inquirer = require("inquirer");
 
 const consoleTable = require("console.table");
 
-const connection = reqMysql.createConnection(
+const db = reqMysql.createConnection(
   {
     host: "localhost",
-    port: 3030,
+    port: 3306,
     user: "root",
     password: "Celecia09!",
     database: "employee_db",
@@ -14,7 +14,7 @@ const connection = reqMysql.createConnection(
   console.log(`employee_db database connected`)
 );
 
-connection.connect((err) => {
+db.connect((err) => {
   console.log("Connected");
   getOptions();
 });
@@ -43,33 +43,51 @@ function getOptions() {
     // Call the appropriate function depending on what the user chose
     .then(function (answer) {
       switch (answer.options) {
+        case "Add Department":
+          addDepartment();
+          break;
         case "Add Role":
           addEmrole();
           break;
         case "Add Employee":
           addEmployee();
           break;
-        case "Add Department":
-          addDepartment();
-          break;
+          case "View Department":
+            viewDepartment();
+            break;
+            case "View Role":
+              viewEmrole();
+              break;
         case "View Employee":
           viewEmployee();
-          break;
-        case "View Department":
-          viewDepartment();
-          break;
-        case "View Role":
-          viewEmrole();
           break;
         default:
           quit();
       }
     });
 }
+function addDepartment() {
+  inquirer.prompt([
+      {
+        type: "input",
+        message: "Enter new Department name",
+        name: "Department",
+      },
+    ])
+    .then(function (answer) {
+      db.query(
+        `INSERT INTO department (name) VALUES ('${answer.name}' )`,
+        function (err, res) {
+          if (err) throw err;
+          console.table(res);
+          getOptions();
+        }
+      );
+    });
+}
 
 function addEmrole() {
-  inquirer
-    .prompt([
+  inquirer.prompt([
       {
         type: "input",
         message: "What is the name of this role?",
@@ -98,8 +116,7 @@ function addEmrole() {
 }
 
 function addEmployee() {
-  inquirer
-    .prompt([
+  inquirer.prompt([
       {
         type: "input",
         message: "Enter First Name for new Employee?",
@@ -139,26 +156,6 @@ function addEmployee() {
 }
 
 
-function addDepartment() {
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        message: "Enter new Department name",
-        name: "Department",
-      },
-    ])
-    .then(function (answer) {
-      db.query(
-        `INSERT INTO department (name) VALUES ('${answer.name}' )`,
-        function (err, res) {
-          if (err) throw err;
-          console.table(res);
-          getOptions();
-        }
-      );
-    });
-}
 
 function viewDepartment() {
   let query = "SELECT * FROM department";
