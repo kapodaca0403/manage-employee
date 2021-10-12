@@ -1,34 +1,48 @@
-INSERT INTO department (name)
-VALUES("Trust and Safety", "Trip", "QA", "NonTrip", "Social Media")
+use employee_db;
 
-INSERT INTO Emrole (title, salary, department_id)
-VAlUES("OM", 40000, 1), 
-("Trust Lead", 50000, 2), ("Trust CSR", 50000, 2), 
-("Trip Lead", 40000, 3). ("Trip CSR", 40000, 3), 
-("NonTrip Lead", 35000, 4), ("NonTrip CSR", 35000, 4),
-("Social Media Lead", 32000, 5), ("Social Media CSR", 32000, 5);
+INSERT INTO department
+    (name)
+VALUES
+    ('Sales'),
+    ('Engineering'),
+    ('Finance'),
+    ('Legal');
+
+INSERT INTO Emrole
+    (title, salary, department_id)
+VALUES
+    ('Sales Lead', 100000, 1),
+    ('Salesperson', 80000, 1),
+    ('Lead Engineer', 150000, 2),
+    ('Software Engineer', 120000, 2),
+    ('Account Manager', 160000, 3),
+    ('Accountant', 125000, 3),
+    ('Legal Team Lead', 250000, 4),
+    ('Lawyer', 190000, 4);
+
+INSERT INTO employee
+    (first_name, last_name, role_id, manager_id)
+VALUES
+    ('John', 'Doe', 1, NULL),
+    ('Mike', 'Chan', 2, 1),
+    ('Ashley', 'Rodriguez', 3, NULL),
+    ('Kevin', 'Tupik', 4, 3),
+    ('Kunal', 'Singh', 5, NULL),
+    ('Malia', 'Brown', 6, 5),
+    ('Sarah', 'Lourd', 7, NULL),
+    ('Tom', 'Allen', 8, 7);
 
 
-INSERT INTO employee(first_name, last_name, role_id, manager_id)
-VALUES("Tristan", "Mitchell", 1, 1)
-("Brandon", "Trahan", 2, 2, ("Brenna ", "Larson", 3, 4), 
-("Jhoski", "Fermin", 4, 4), ("Jake", "Rodgers", 5, 5) ,
-("Joe", "Lopez", 6, 3), ("Sav", "Ivy", 7, 2),
-("Oswald", "Ruiz", 8, 2), ("Brian", "Dries", 9, 4)
 
-
+    select
+    *
+from
+    departments;
 select
-employee.first_name, employee.last_name, role.title, role.salary, department.name, employee.first_name as manager_firstname, employee.last_name as manger_lastname from employee
-join role on employee.role_id = role_id
-join department on role.department_id = department_id
-Left join employee as employee on employee.manager_id = employee.id; 
-
-
-select * from 
-department; 
-
-select * from 
-Emrole; 
-
- select * from 
- employee;
+    *
+from
+    role;
+select
+    *
+from
+    employee;

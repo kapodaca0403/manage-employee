@@ -24,8 +24,7 @@ db.connect((err) => {
 // needing to show prompts when choices are selected
 
 function getOptions() {
-  inquirer
-    .prompt({
+  inquirer.prompt({
       type: "list",
       name: "options",
       message: "What do you want to start with first?",
@@ -46,18 +45,22 @@ function getOptions() {
         case "Add Department":
           addDepartment();
           break;
+
         case "Add Role":
           addEmrole();
           break;
+
         case "Add Employee":
           addEmployee();
           break;
-          case "View Department":
-            viewDepartment();
-            break;
-            case "View Role":
-              viewEmrole();
-              break;
+
+        case "View Department":
+          viewDepartment();
+          break;
+          
+        case "View Role":
+          viewEmrole();
+          break;
         case "View Employee":
           viewEmployee();
           break;
@@ -76,9 +79,8 @@ function addDepartment() {
     ])
     .then(function (answer) {
       db.query(
-        `INSERT INTO department (name) VALUES ('${answer.name}' )`,
+        `INSERT INTO department (name) VALUES ('${answer.depName}');`,
         function (err, res) {
-          if (err) throw err;
           console.table(res);
           getOptions();
         }
@@ -87,7 +89,18 @@ function addDepartment() {
 }
 
 function addEmrole() {
-  inquirer.prompt([
+  db.query("SELECT * FROM department", function (err, res) {
+    console.log(res)
+    if (err) throw err;
+    let departmentArr = res;
+    let departmentName = [];
+    let departmentId = 0;
+    for (obj of res) {
+      departmentName.push(obj.depName);
+    }
+    console.log(departmentName);
+    // departmentName.push("Create New Department");
+    inquirer.prompt([
       {
         type: "input",
         message: "What is the name of this role?",
@@ -99,21 +112,31 @@ function addEmrole() {
         name: "Salary",
       },
       {
-        type: "input",
+        type: "rawlist",
         message: "What Department would you like to add new role?",
         name: "Department",
+        choices: departmentName 
       },
     ])
     .then(function (answer) {
-      db.query`INSERT INTO Emrole (
-      title, salary, department_id) VALUES ('${answer.Emrole}', '${answer.salary}' , '${answer.department_id}')`,
-        function (err, res) {
+      for (obj of departmentArr) {
+         if (res.departmentName === obj.name) {
+           departmentId = obj.id;
+          }
+       }
+       console.log(`Added ${res.roleName} to the database`);
+       db.query(
+        `INSERT INTO Emrole (
+          title, salary, department_id) VALUES ('${answer.Emrole}', '${answer.Salary}' , '${departmentId}');`,
+          function (err, res) {
           if (err) throw err;
           console.table(res);
           getOptions();
-        };
-    });
-}
+        }
+        );
+      });
+      });
+    }
 
 function addEmployee() {
   inquirer.prompt([
@@ -144,18 +167,18 @@ function addEmployee() {
       },
     ])
     .then(function (answer) {
-      db.query`INSERT INTO employee (
+      db.query(
+        `INSERT INTO employee (
     first_name, last_name, role_id, manager_id) VALUES ('${answer.firstName}', 
-'${answer.lastName}', '${answer.roleId}', '${answer.managerId}')`,
+'${answer.lastName}', '${answer.roleId}', '${answer.managerId}');`,
         function (err, res) {
           if (err) throw err;
           console.table(res);
           getOptions();
-        };
+        }
+      );
     });
 }
-
-
 
 function viewDepartment() {
   let query = "SELECT * FROM department";
