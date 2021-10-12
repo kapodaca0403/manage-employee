@@ -20,7 +20,7 @@ This project is licensed under the MIT license.
 
 For business owners to be able to view, and manage the departments, roles and employees at their company to organize and plan their businesses. 
 
-
+![Uploading Untitled_ Oct 11, 2021 9_02 PM.gif…]()
 
 ## Tests
 undefined
