@@ -79,7 +79,7 @@ function addDepartment() {
     ])
     .then(function (answer) {
       db.query(
-        `INSERT INTO department (name) VALUES ('${answer.depName}');`,
+        `INSERT INTO department (name) VALUES ('${answer.Department}');`,
         function (err, res) {
           console.table(res);
           getOptions();
@@ -120,14 +120,14 @@ function addEmrole() {
     ])
     .then(function (answer) {
       for (obj of departmentArr) {
-         if (res.departmentName === obj.name) {
+         if (res.depName === obj.name) {
            departmentId = obj.id;
           }
        }
        console.log(`Added ${res.roleName} to the database`);
        db.query(
         `INSERT INTO Emrole (
-          title, salary, department_id) VALUES ('${answer.Emrole}', '${answer.Salary}' , '${departmentId}');`,
+          title, salary, department_id) VALUES ('${answer.Role}', '${answer.Salary}' , '${departmentId}');`,
           function (err, res) {
           if (err) throw err;
           console.table(res);
@@ -169,8 +169,8 @@ function addEmployee() {
     .then(function (answer) {
       db.query(
         `INSERT INTO employee (
-    first_name, last_name, role_id, manager_id) VALUES ('${answer.firstName}', 
-'${answer.lastName}', '${answer.roleId}', '${answer.managerId}');`,
+    first_name, last_name, role_id, manager_id) VALUES ('${answer.FirstName}', 
+'${answer.LastName}', '${answer.Role}', '${answer.Manager}');`,
         function (err, res) {
           if (err) throw err;
           console.table(res);
