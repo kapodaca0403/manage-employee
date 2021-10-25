@@ -190,7 +190,7 @@ function viewDepartment() {
 }
 
 function viewEmrole() {
-  let query = "SELECT * FROM role";
+  let query = "SELECT * FROM Emrole";
   db.query(query, function (err, res) {
     if (err) throw err;
     console.table(res);
@@ -199,7 +199,7 @@ function viewEmrole() {
 }
 
 function viewEmployee() {
-  let query = "SELECT * FROM Employ";
+  let query = "SELECT * FROM employee";
   db.query(query, function (err, res) {
     if (err) throw err;
     console.table(res);
