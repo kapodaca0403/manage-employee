@@ -18,10 +18,11 @@ This project is licensed under the MIT license.
   
 ## Description 
 
-For business owners to be able to view, and manage the departments, roles and employees at their company to organize and plan their businesses. 
+For business owners to be able to view, and manage the departments, roles and employees at their company to organize and plan their businesses.
 
-![Untitled_ Oct 11, 2021 9_02 PM](https://user-images.githubusercontent.com/87509827/136898697-72158ec6-1b06-4504-9e8f-68aa3ba5a882.gif)
+Here is the walkthru: https://youtu.be/_1p7A2TO0H4
 
+<img width="384" alt="employdata" src="https://user-images.githubusercontent.com/87509827/138661286-147a24e2-74b3-40d2-8a24-3aa2d58c95ec.PNG">
 
 ## Tests
 undefined
