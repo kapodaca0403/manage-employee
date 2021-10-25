@@ -1,7 +1,6 @@
 use employee_db;
 
-INSERT INTO department
-    (name)
+INSERT INTO department depName)
 VALUES
     ('Sales'),
     ('Engineering'),
@@ -37,11 +36,11 @@ VALUES
     select
     *
 from
-    departments;
+    department;
 select
     *
 from
-    role;
+    Emrole;
 select
     *
 from

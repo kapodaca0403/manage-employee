@@ -2,6 +2,7 @@ const reqMysql = require("mysql2");
 const inquirer = require("inquirer");
 
 const consoleTable = require("console.table");
+const { faBreadSlice } = require("@fortawesome/free-solid-svg-icons");
 
 const db = reqMysql.createConnection(
   {
@@ -61,9 +62,11 @@ function getOptions() {
         case "View Role":
           viewEmrole();
           break;
+
         case "View Employee":
           viewEmployee();
           break;
+
         default:
           quit();
       }
@@ -161,7 +164,7 @@ function addEmployee() {
         name: "Manager",
       },
       {
-        type: "input",
+        type: "Input",
         message: "Enter Department",
         name: "Department",
       },
@@ -179,6 +182,7 @@ function addEmployee() {
       );
     });
 }
+
 
 function viewDepartment() {
   let query = "SELECT * FROM department";
