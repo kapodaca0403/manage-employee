@@ -82,7 +82,7 @@ function addDepartment() {
     ])
     .then(function (answer) {
       db.query(
-        `INSERT INTO department (name) VALUES ('${answer.Department}');`,
+        `INSERT INTO department (depName) VALUES ('${answer.Department}');`,
         function (err, res) {
           console.table(res);
           getOptions();
@@ -123,11 +123,11 @@ function addEmrole() {
     ])
     .then(function (answer) {
       for (obj of departmentArr) {
-         if (res.depName === obj.name) {
+         if (res.departmentName === obj.name) {
            departmentId = obj.id;
           }
        }
-       console.log(`Added ${res.roleName} to the database`);
+       console.log(`Added to the database`);
        db.query(
         `INSERT INTO Emrole (
           title, salary, department_id) VALUES ('${answer.Role}', '${answer.Salary}' , '${departmentId}');`,
@@ -155,12 +155,12 @@ function addEmployee() {
       },
       {
         type: "input",
-        message: "Enter role for new Employee",
+        message: "Enter role ID for new Employee",
         name: "Role",
       },
       {
         type: "input",
-        message: "Enter Manager for new Employee",
+        message: "Enter Manager ID for new Employee",
         name: "Manager",
       },
       {
